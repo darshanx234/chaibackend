@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<p id="example" style="color: red; font-size: 16px;">This is a paragraph.</p>
+
+<script>
+// Accessing computed styles
+var paragraphElement = document.getElementById("example");
+var computedStyles = window.getComputedStyle(paragraphElement);
+var colorStyle = computedStyles.color; // Accessing computed color
+var fontSizeStyle = computedStyles.fontSize; // Accessing computed font size
+
+console.log(colorStyle); // Output: "rgb(255, 0, 0)"
+console.log(fontSizeStyle); // Output: "16px"
+</script>
+
+</body>
+</html>

@@ -66,11 +66,12 @@ userSchema.pre("save", async function (next) {
 })
 
 userSchema.methods.isPasswordCorrect = async function (password) {
-    await bcrypt.compare(password, this.password);
+  const compared =   await bcrypt.compare(password, this.password);
+  return compared;
 }
 // jitne chahiye utane methods aap apne schema me add kar sakate ho 
 userSchema.methods.generateAccessToken = function () {
-    jwt.sign(
+   const accessToken = jwt.sign(
         {
             _id: this._id,
             email: this.email,
@@ -84,10 +85,11 @@ userSchema.methods.generateAccessToken = function () {
             expiresIn: process.env.ACCESS_TOKEN_EXPIRY
         }
     ) // .sign method is used for generate token
+    return accessToken
 }
 
 userSchema.methods.generateRefreshToken = function () {
-    jwt.sign(
+  const refreshToken=  jwt.sign(
         {
             _id: this._id,
           
@@ -99,5 +101,6 @@ userSchema.methods.generateRefreshToken = function () {
             expiresIn: process.env.REFRESH_TOKEN_EXPIRY
         }
     )
+    return refreshToken
 }
 export const user = mongoose.model("user", userSchema)
